@@ -94,7 +94,6 @@ class rogueAP:
             self.airb_cmd = ['airbase-ng'] + airb_opts
 
         self.airb_cmd = " ".join(self.airb_cmd)
-        print self.airb_cmd
         self.set_ip_cmd = "ifconfig "+self.rogueif+" up 10.0.0.1 netmask 255.255.255.0"
         hapd_config_file ="""
 interface="""+self.rogueif+"""
