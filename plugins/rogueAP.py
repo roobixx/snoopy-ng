@@ -59,7 +59,8 @@ class Snoop(Thread):
                                      ("hostapd=[True|False]","Use hostapd instead of airbase-ng."),
                                      ("hapdconf=<path>","Specify the hostapd config file to use."),
                                      ("hapdcmd=<path>","Specify the hostapd binary to use."),
-                                     ("sslstrip=[True|False]","Send traffic through Moxie's SSL strip.")
+                                     ("sslstrip=[True|False]","Send traffic through Moxie's SSL strip. sslstrip and mitmproxy are mutually exclusive."),
+                                     ("mitmproxy=[True|False]","Send traffic through mitmproxy. sslstrip and mitmproxy are mutually exclusive.")
                                     ]
                 }
         return info
