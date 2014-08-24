@@ -53,9 +53,10 @@ class Snoop(Thread):
     def get_parameter_list():
         info = {"info" : "Create a rogue access point.",
                 "parameter_list" : [ ("ssid=<name>","The SSID of the acces point."),
-                                     ("promis=[True|False]","Set promiscuous mode (respond to all probe requests)."),
+                                     ("promisc=[True|False]","Set promiscuous mode (respond to all probe requests)."),
                                      ("run_dhcp=[True|False]","Run a DHCP server."),
                                      ("local_nat=[True|False]","Run local NAT to route traffic out."),
+                                     ("ip_prefix=<prefix>","The first 3 octets of the provisioned IP addresses. Defaults to 10.0.0"),
                                      ("hostapd=[True|False]","Use hostapd instead of airbase-ng."),
                                      ("hapdconf=<path>","Specify the hostapd config file to use."),
                                      ("hapdcmd=<path>","Specify the hostapd binary to use."),

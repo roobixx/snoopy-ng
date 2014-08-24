@@ -26,6 +26,7 @@ class rogueAP:
         self.ssid = kwargs.get("ssid", "FreeInternet")
         self.wlan_iface = kwargs.get("wlan_iface", "mon0")    # If none, will use first wlan capable of injection
         self.net_iface = kwargs.get("net_iface", "eth0")    # iface with outbound internet access
+        self.ip_prefix = kwargs.get("ip_prefix", "10.0.0")
         self.enable_mon = kwargs.get("enable_mon", False)   # airmon-ng start <wlan_iface>
         self.promisc =   kwargs.get("promisc", False)       # Answer all probe requests
         self.do_sslstrip = kwargs.get("sslstrip", False)
@@ -94,7 +95,7 @@ class rogueAP:
             self.airb_cmd = ['airbase-ng'] + airb_opts
 
         self.airb_cmd = " ".join(self.airb_cmd)
-        self.set_ip_cmd = "ifconfig "+self.rogueif+" up 10.0.0.1 netmask 255.255.255.0"
+        self.set_ip_cmd = "ifconfig " + self.rogueif + " up " + self.ip_prefix + ".1 netmask 255.255.255.0"
         hapd_config_file ="""
 interface="""+self.rogueif+"""
 bssid=00:11:22:33:44:00
@@ -119,16 +120,18 @@ enable_karma=1
         f.close()
 
         # Vars for DHCP server
+        subs = { 'ip_prefix': self.ip_prefix }
         config_file ="""
-dhcp-range=10.0.0.2,10.0.0.100,255.255.255.0,8765h
-dhcp-option=3,10.0.0.1
+dhcp-range={ip_prefix}.2,{ip_prefix}.100,255.255.255.0,8765h
+dhcp-option=3,{ip_prefix}.1
 dhcp-option=6,8.8.8.8
 dhcp-leasefile=/etc/dhcpd.leases
-"""
+""".format(**subs)
+
         f=open('/etc/dnsmasq.conf', 'w')
         f.write(config_file)
         f.close()
-        self.launch_dhcp = "dnsmasq -d -a 10.0.0.1 -i "+self.rogueif+" -C /etc/dnsmasq.conf"
+        self.launch_dhcp = "dnsmasq -d -a " + self.ip_prefix + ".1 -i " + self.rogueif + " -C /etc/dnsmasq.conf"
 
         # Monitor dhcpd.lease file for updates
         with file("/etc/dhcpd.leases", 'a'):

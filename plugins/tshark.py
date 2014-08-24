@@ -136,7 +136,6 @@ class Snoop(Thread):
             "-Y 'wlan.fcs_good eq 1 and (wlan.fc.type_subtype eq 4 or wlan.fc.type_subtype eq 8)'",
             "-T fields -e wlan.fc.type_subtype -e wlan.sa -e wlan_mgt.ssid -e radiotap.dbm_antsignal -e frame.time -E separator=, -E quote=d"
         ]
-
         self.subproc = subprocess.Popen(" ".join(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, close_fds='posix' in sys.builtin_module_names)
         self.packet_q = Queue()
         t = threading.Thread(target=self.enqueue_output, args=(self.subproc.stdout, self.packet_q))
