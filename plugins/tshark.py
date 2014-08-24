@@ -133,7 +133,7 @@ class Snoop(Thread):
         cmd = [
             "tshark -l",
             cmd_iface,
-            "-Y 'wlan.fcs_good eq 1 and (wlan.fc.type_subtype eq 4 or wlan.fc.type_subtype eq 8)'",
+            "-R 'wlan.fcs_good eq 1 and (wlan.fc.type_subtype eq 4 or wlan.fc.type_subtype eq 8)'",
             "-T fields -e wlan.fc.type_subtype -e wlan.sa -e wlan_mgt.ssid -e radiotap.dbm_antsignal -e frame.time -E separator=, -E quote=d"
         ]
         self.subproc = subprocess.Popen(" ".join(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, close_fds='posix' in sys.builtin_module_names)
