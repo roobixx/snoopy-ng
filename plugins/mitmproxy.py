@@ -1,103 +1,106 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import logging
-from sqlalchemy import Float, DateTime, String, Integer, Table, MetaData, Column #As required
-from threading import Thread
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s %(filename)s: %(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
-import time
-from collections import deque
-from random import randint
-import datetime
-from threading import Thread
 import os
+import logging
+
+from threading import Thread
+from libmproxy import flow
+from libmproxy.proxy import config, server
+from sqlalchemy import Float, DateTime, String, Text, Integer, Table, MetaData, Column
 from includes.fonts import *
 from includes.mitm import *
 
-
 class Snoop(Thread):
-    """This plugin starts a proxy server."""
+    """
+    This plugin runs the mitmproxy daemon for traffic interception.
+    """
     def __init__(self, **kwargs):
-        Thread.__init__(self)
-        self.data_store = deque(maxlen=1000)
-
-        # Process arguments passed to module
-        self.port = int(kwargs.get('port', 8080))
-        self.transparent = kwargs.get('transparent', 'false').lower()
-        self.verb = kwargs.get('verbose', 0)
+        self.gotofail = kwargs.get("gotofail", False)
+        self.verb = kwargs.get("verbose", 1)
+        self.port = 8080
         self.fname = os.path.splitext(os.path.basename(__file__))[0]
 
-        config = proxy.ProxyConfig(
-            cacert = os.path.expanduser("~/.mitmproxy/mitmproxy-ca.pem"),
-            transparent_proxy = dict (showhost=True, resolver = platform.resolver(), sslports = [443, 8443])
-        )
+        if (self.gotofail == "True"):
+            conf = config.ProxyConfig(mode="transparent", certforward=True,
+                    ciphers="DHE-RSA-AES256-SHA")
+        else:
+            conf = config.ProxyConfig(mode="transparent")
 
+        self.proxy = SnoopyMaster(server=server.ProxyServer(conf, self.port),
+            state=flow.State(), dbms=kwargs.get("dbms"),
+            run_id=kwargs.get("run_id"), plugin_name=self.fname)
 
-        state = flow.State()
-        server = proxy.ProxyServer(config, self.port)
-        self.m = MyMaster(server, state)
+        Thread.__init__(self)
+        self.setName("mitmproxy")
 
+    def is_ready(self):
+        return True
 
     def run(self):
         logging.info("Plugin %s%s%s started proxy on port %s%s%s" % (GR,self.fname,G,GR,self.port,G))
-        self.m.run()
-
-    def is_ready(self):
-        #Perform any functions that must complete before plugin runs
-        return True
+        self.proxy.run()
 
     def stop(self):
-        self.m.shutdown()
+        self.proxy.shutdown()
+
+    def get_data(self):
+        web_logs = []
+        while self.proxy.logs:
+            web_logs.append(self.proxy.logs.popleft())
+
+        web_locations = []
+        while self.proxy.locations:
+            web_locations.append(self.proxy.locations.popleft())
+
+        web_fingerprints = []
+        while self.proxy.fingerprints:
+            web_fingerprints.append(self.proxy.fingerprints.popleft())
+
+        return [("web_logs", web_logs), ("web_locations", web_locations), ("web_fingerprints", web_fingerprints)]
 
     @staticmethod
     def get_parameter_list():
-        info = {"info" : "This plugin runs a proxy server. It's useful in conjunction with iptables and rogueAP",
-                "parameter_list" : [ ("port=<port>","Port for proxy to listen on."),
-                                     ("upprox=<ip:port>","Upstream proxy to use."),
-                                     ("transparent=[True|False]","Set transparent mode. Default is False")
-                                    ] 
+        info = {"info" : "This plugin runs a mitmproxy server. It's useful in conjunction with iptables and rogueAP.",
+                "parameter_list" : [
+                ("gotofail=[True|False]","Attempt to set up the proxy to exploit CVE-2014-1266. Requires manual install of mitmproxy from github master.")]
                 }
         return info
 
-
-    def get_data(self):
-        """Ensure data is returned in the form of a SQL row."""
-        #e.g of return data - [("tbl_name", [{'var01':99, 'var02':199}]
-        data = self.m.get_logs()
-        toReturn = []
-        if data:
-            for d in data:
-                toReturn.append(d)
-            return [("web_logs", toReturn)] 
-        else:
-            return []
-
-
     @staticmethod
     def get_tables():
-        """This function should return a list of table(s)"""
+        web_logs = Table('web_logs', MetaData(),
+            Column('client_ip', String(length=15)),
+            Column('timestamp', DateTime),
+            Column('protocol', String(length=10)),
+            Column('method', String(length=7)),
+            Column('host', String(length=255)),
+            Column('url', Text),
+            Column('useragent', Text),
+            Column('sunc', Integer, default=0)
+        )
 
-        table = Table('web_logs',MetaData(),
-                              Column('client_ip', String(length=15)),
-                              Column('host', String(length=40)),
-                              Column('path', String(length=20)),
-                              Column('full_url', String(length=20)),
-                              Column('method', String(length=20)),
-                              Column('port', String(length=20)),
-                              Column('timestamp', String(length=20)),
-                              Column('useragent', String(length=20)),
-                              Column('cookies', String(length=20)),        
-                              Column('sunc', Integer, default=0)
-                    )
+        web_locations = Table('web_locations', MetaData(),
+            Column('client_ip', String(length=15)),
+            Column('timestamp', DateTime),
+            Column('useragent', Text),
+            Column('lat', Float()),
+            Column('lon', Float()),
+            Column('speed', Float()),
+            Column('alt', Float()),
+            Column('sunc', Integer, default=0)
+        )
 
-        #TODO: Need to pull MAC address out with mitm to incorporate below.
-        table2 = Table('user_agents', MetaData(),
-                        Column('mac', String(64), primary_key=True), #Len 64 for sha256
-                        Column('userAgent', String(128), primary_key=True, autoincrement=False)) #One device may have multiple browsers
+        web_fingerprints = Table('web_fingerprints', MetaData(),
+            Column('client_ip', String(length=15)),
+            Column('timestamp', DateTime),
+            Column('useragent', Text),
+            Column('fingerprint', Integer()),
+            Column('sunc', Integer, default=0)
+        )
 
-        return [table]
+        return [web_logs, web_locations, web_fingerprints]
 
 if __name__ == "__main__":
     Snoop().start()
+

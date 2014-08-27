@@ -120,12 +120,18 @@ enable_karma=1
         f.close()
 
         # Vars for DHCP server
-        subs = { 'ip_prefix': self.ip_prefix }
+        subs = {
+            'ip_prefix': self.ip_prefix,
+            'proxy_app': 'address=/proxyapp/74.125.237.130' if self.do_mitmproxy else ''
+        }
         config_file ="""
 dhcp-range={ip_prefix}.2,{ip_prefix}.100,255.255.255.0,8765h
 dhcp-option=3,{ip_prefix}.1
-dhcp-option=6,8.8.8.8
+dhcp-option=6,{ip_prefix}.1
 dhcp-leasefile=/etc/dhcpd.leases
+server=8.8.8.8
+server=8.8.4.4
+{proxy_app}
 """.format(**subs)
 
         f=open('/etc/dnsmasq.conf', 'w')
