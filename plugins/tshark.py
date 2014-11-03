@@ -52,7 +52,9 @@ class Snoop(Thread):
         self.last_probes_update = 0
         self.last_beacons_update = 0
         self.probes_count = 0
+        self.blank_probes_count = 0
         self.ap_names = fifoDict(names=("mac", "ssid"))
+        self.probes = fifoDict(names=("mac","ssid", "timestamp", "timestamp_ms", "dbm_antsignal", "channel", "fcs"), size=5000)
         self.mv = mac_vendor()
 
         self.enable_monitor_mode = False if self.enable_monitor_mode == "False" else True
@@ -130,12 +132,22 @@ class Snoop(Thread):
     """"""
     def sniff(self):
         cmd_iface = "-i " + self.iface if self.iface is not None else ""
+
+        '''
         cmd = [
             "tshark -l",
             cmd_iface,
             "-R 'wlan.fcs_good eq 1 and (wlan.fc.type_subtype eq 4 or wlan.fc.type_subtype eq 8)'",
             "-T fields -e wlan.fc.type_subtype -e wlan.sa -e wlan_mgt.ssid -e radiotap.dbm_antsignal -e frame.time -E separator=, -E quote=d"
         ]
+        '''
+        cmd = [
+            "tshark -l",
+            cmd_iface,
+            "-R 'wlan.fc.type_subtype eq 4'",
+            "-T fields -e wlan.fc.type_subtype -e wlan.sa -e wlan_mgt.ssid -e radiotap.dbm_antsignal -e frame.time -e wlan.fcs_good -e radiotap.channel.freq -E separator=, -E quote=d"
+        ]
+
         self.subproc = subprocess.Popen(" ".join(cmd), shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, close_fds='posix' in sys.builtin_module_names)
         self.packet_q = Queue()
         t = threading.Thread(target=self.enqueue_output, args=(self.subproc.stdout, self.packet_q))
@@ -155,7 +167,7 @@ class Snoop(Thread):
         r.extend([0])
         d = datetime.strptime(r[4][:-3], "%b %d, %Y %H:%M:%S.%f")
         r[4] = d
-        r[5] = d.microsecond
+        r[7] = d.microsecond
         return r
 
     """"""
@@ -177,11 +189,18 @@ class Snoop(Thread):
 
         if frame_type == 4:
             self.probes_prox.pulse(mac, timeStamp)
+            self.blank_probes_count += 1
             if self.verb > 1 and len(ssid) > 0:
                 logging.info("Plugin %s%s%s noted device %s%s%s (%s%s%s) probing for %s%s%s" % (GR,self.fname,G,GR,mac,G,GR,vendor[0],G,GR,ssid,G))
             if len(ssid) > 0:
                 self.client_ssids.add((mac, ssid))
                 self.probes_count += 1
+
+            probe = (mac,ssid,timeStamp,p[7],sig_str,p[6],p[5])
+            if self.verb > 1:
+                logging.info("Sub-plugin %s%s%s noted probe %s%s%s" % (GR,self.fname,G,GR,probe,G))
+            self.probes.add(probe)
+
         elif frame_type == 8:
             self.beacons_prox.pulse(mac, timeStamp)
             if self.verb > 1 and len(ssid) > 0:
@@ -205,11 +224,12 @@ class Snoop(Thread):
         device_vendors = self.device_vendor.getNew()
         client_ssids = self.client_ssids.getNew()
         ap_names = self.ap_names.getNew()
+        probes_List = self.probes.getNew()
         os_time = os.times()[4]
 
         if self.verb > 0 and probes_prox and abs(os_time - self.last_probes_update) > printFreq:
             logging.info("Plugin %s%s%s currently observing %s%d%s client devices" % (GR,self.fname,G,GR,self.probes_prox.getNumProxs(),G))
-            logging.info("Plugin %s%s%s has collected %s%d%s probe requests" % (GR,self.fname,G,GR,self.probes_count,G))
+            logging.info("Plugin %s%s%s has collected %s%s%s probe requests" % (GR,self.fname,G,GR,str(self.probes_count) + "/" + str(self.blank_probes_count),G))
             self.last_probes_update = os_time
 
         if self.verb > 0 and beacons_prox and abs(os.times()[4] - self.last_beacons_update) > printFreq:
@@ -220,7 +240,8 @@ class Snoop(Thread):
                 ("wifi_client_obs", probes_prox),
                 ("wifi_client_ssids", client_ssids),
                 ("wifi_AP_obs", beacons_prox),
-                ("wifi_AP_ssids", ap_names)
+                ("wifi_AP_ssids", ap_names),
+                ("wifi_probes", probes_List)
         ]
         return data
 

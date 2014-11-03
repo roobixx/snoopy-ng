@@ -7,13 +7,14 @@ from sqlalchemy import MetaData, Table, Column, Integer, String, Unicode, DateTi
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
 from scapy.all import Dot11Beacon, Dot11Elt
 from base64 import b64encode
-from includes.common import snoop_hash, printFreq 
+from includes.common import snoop_hash, printFreq
 import os
 from includes.fonts import *
 from includes.prox import prox
 from includes.fifoDict import fifoDict
 import datetime
 from includes.mac_vendor import mac_vendor
+from includes import scapy_ex
 
 #N.B If you change b64mode to False, you should probably change
 # the ssid colum to type Unicode.
@@ -64,11 +65,7 @@ class Snarf():
                 ssid = b64encode(p[Dot11Elt].info)
             else:
                 ssid = p[Dot11Elt].info.decode('utf-8', 'ignore')
-            try:
-                sig_str = -(256-ord(p.notdecoded[-4:-3])) #TODO: Use signal strength
-            except:
-                logging.error("Unable to extract signal strength")
-                logging.error(p.summary())
+            sig_str = p.dBm_AntSignal
 
             self.prox.pulse(mac,timeStamp)
             self.ap_names.add((mac,ssid))
@@ -87,7 +84,7 @@ class Snarf():
             vendorShort = vendor[0]
             vendorLong = vendor[1]
             vendors.append({"mac": mac, "vendor": vendorShort, "vendorLong": vendorLong})
-                
+
         if proxSess and self.verb > 0 and abs(os.times()[4] - self.lastPrintUpdate) > printFreq:
             logging.info("Sub-plugin %s%s%s currently observing %s%d%s Access Points" % (GR,self.fname,G,GR,self.prox.getNumProxs(),G))
             self.lastPrintUpdate = os.times()[4]

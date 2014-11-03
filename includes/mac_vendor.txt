@@ -19629,3 +19629,362 @@ FCF152|Sony|Sony Corporation
 FCF647|Fiberhom|Fiberhome Telecommunication Tech.Co.,Ltd.
 FCF8B7|TronteqE|TRONTEQ Electronic
 FCFFAA|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAL public listing for more information.
+003560|RosenAvi|Rosen Aviation
+00A2F5|Guangzho|Guangzhou Yuanyun Network Technology Co.,Ltd
+00A509|Wigwag|WigWag Inc.
+00E6E8|NetzinTe|Netzin Technology Corporation,.Ltd.
+00F3DB|WooSport|WOO Sports
+00F46F|SamsungE|Samsung Elec Co.,Ltd
+049B9C|Eadingco|Eadingcore  Intelligent Technology Co., Ltd.
+04BD70|HuaweiTe|HUAWEI TECHNOLOGIES CO.,LTD
+04C09C|Tellabs|Tellabs Inc.
+08A5C8|SunnovoI|Sunnovo International Limited
+08E84F|HuaweiTe|HUAWEI TECHNOLOGIES CO.,LTD
+08EB29|JiangsuH|Jiangsu Huitong Group Co.,Ltd.
+08EE8B|SamsungE|Samsung Elec Co.,Ltd
+08EFAB|SaymeWir|SAYME WIRELESS SENSOR NETWORK
+0CB319|SamsungE|Samsung Elec Co.,Ltd
+0CEFAF|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+0CF5A4|Cisco|Cisco
+100723|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+1008B1|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+104A7D|IntelCor|Intel Corporate
+10A659|MobileCr|Mobile Create Co.,Ltd.
+10C67E|Shenzhen|SHENZHEN JUCHIN TECHNOLOGY CO., LTD
+10F681|VivoMobi|vivo Mobile Communication Co., Ltd.
+10FACE|Reacheng|Reacheng Communication Technology Co.,Ltd
+141AA3|Motorola|Motorola Mobility LLC
+142971|NemoaEle|NEMOA ELECTRONICS (HK) CO. LTD
+1436C6|LenovoMo|Lenovo Mobile Communication Technology Ltd.
+14893E|VixtelTe|VIXTEL TECHNOLOGIES LIMTED
+148F21|GarminIn|Garmin International
+181E78|Sagemcom|Sagemcom
+186571|TopVicto|Top Victory Electronics (Taiwan) Co., Ltd.
+186882|BewardR&|Beward R&D Co., Ltd.
+18A3E8|Fiberhom|Fiberhome Telecommunication Tech.Co.,Ltd.
+18F145|NetcommW|NetComm Wireless Limited
+18FF0F|IntelCor|Intel Corporate
+1C3947|CompalIn|COMPAL INFORMATION (KUNSHAN) CO., LTD.
+1C7D22|FujiXero|Fuji Xerox Co., Ltd.
+1C8E5C|HuaweiTe|Huawei Technologies Co., Ltd
+1C965A|WeifangG|Weifang goertek Electronics CO.,LTD
+1C9ECB|BeijingN|Beijing Nari Smartchip Microelectronics Company Limited
+2031EB|Hdsn|Hdsn
+206274|Microsof|Microsoft Corporation
+207693|LenovoBe|Lenovo (Beijing) Limited.
+20A2E4|Apple|Apple
+20C06D|Shenzhen|SHENZHEN SPACETEK TECHNOLOGY CO.,LTD
+240995|HuaweiTe|Huawei Technologies Co., Ltd
+247F3C|HuaweiTe|Huawei Technologies Co., Ltd
+2497ED|Techvisi|Techvision Intelligent Technology Limited
+24A074|Apple|Apple
+2852E0|LayonInt|Layon international Electronic & Telecom Co.,Ltd
+2884FA|Sharp|SHARP Corporation
+28D98A|Hangzhou|Hangzhou Konke Technology Co.,Ltd.
+28E476|Pi-Coral|Pi-Coral
+2C1F23|Apple|Apple
+2C2997|Microsof|Microsoft Corporation
+2C337A|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+2C3796|Cybo|CYBO CO.,LTD.
+2C5089|Shenzhen|Shenzhen Kaixuan Visual Technology Co.,Limited
+2C600C|QuantaCo|QUANTA COMPUTER INC.
+2CAD13|Shenzhen|SHENZHEN ZHILU TECHNOLOGY CO.,LTD
+2CF7F1|SeeedTec|Seeed Technology Inc.
+300EE3|Aquantia|Aquantia Corporation
+307350|InpecoSa|Inpeco SA
+30D587|SamsungE|Samsung Electronics Co.,Ltd
+3438AF|InlabSof|Inlab Software GmbH
+344CA4|Amazipoi|amazipoint technology Ltd.
+3464A9|HewlettP|Hewlett Packard
+346895|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+346F90|Cisco|Cisco
+34873D|QuectelW|Quectel Wireless Solution Co.,Ltd.
+349E34|Evervict|Evervictory Electronic Co.Ltd
+34A395|Apple|Apple
+34E6D7|Dell|Dell Inc.
+3809A4|FireflyI|Firefly Integrations
+382C4A|AsustekC|ASUSTek COMPUTER INC.
+383BC8|2wire|2wire
+3863BB|HewlettP|Hewlett Packard
+389496|SamsungE|Samsung Elec Co.,Ltd
+3C1A0F|Clearsky|ClearSky Data
+3C1E04|D-LinkIn|D-Link International
+3C1E13|Hangzhou|HANGZHOU SUNRISE TECHNOLOGY CO., LTD
+3C2C94|æ­å·å¾·æ¾ç§ææé|æ­å·å¾·æ¾ç§ææéå¬å¸ï¼HangZhou Delan Technology Co.,Ltdï¼
+3C39E7|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+3C4937|AssmannE|ASSMANN Electronic GmbH
+3C6A9D|DexatekT|Dexatek Technology LTD.
+3CAE69|EsaElekt|ESA Elektroschaltanlagen Grimma GmbH
+3CB792|HitachiM|Hitachi Maxell, Ltd., Optronics Division
+3CC2E1|XinhuaCo|XINHUA CONTROL ENGINEERING CO.,LTD
+4062B6|TeleSyst|Tele system communication
+409B0D|Shenzhen|Shenzhen Yourf Kwan Industrial Co., Ltd
+40D28A|Nintendo|Nintendo Co., Ltd.
+40EACE|FounderB|FOUNDER BROADBAND NETWORK SERVICE CO.,LTD
+44356F|Neterix|Neterix
+445ECD|Razer|Razer Inc
+446D6C|SamsungE|Samsung Elec Co.,Ltd
+44E137|ArrisGro|ARRIS Group, Inc.
+44F477|JuniperN|Juniper Networks
+48437C|Apple|Apple
+48555F|Fiberhom|Fiberhome Telecommunication Tech.Co.,Ltd.
+4886E8|Microsof|Microsoft Corporation
+48C093|Xirrus|Xirrus, Inc.
+4C09D4|Arcadyan|Arcadyan Technology Corporation
+4C0BBE|Microsof|Microsoft
+4C7625|Dell|Dell Inc.
+4CA515|BaikalEl|Baikal Electronics JSC
+4CA928|Insensi|Insensi
+4CE2F1|SclakSrl|sclak srl
+505527|LgElectr|LG Electronics
+50ADD5|Dynalec|Dynalec Corporation
+50F43C|Leeo|Leeo Inc
+54098D|DeisterE|deister electronic GmbH
+54369B|InOneNet|In one network technology (Beijing) Co., Ltd.
+545146|Amg|AMG Systems Ltd.
+549F13|Apple|Apple
+581F28|HuaweiTe|Huawei Technologies Co., Ltd
+586AB1|Hangzhou|Hangzhou H3C Technologies Co., Limited
+587FB7|SonarInd|SONAR INDUSTRIAL CO., LTD.
+58856E|Qsc|QSC AG
+5C2BF5|Vivint|Vivint
+5C2ED2|AbcXishe|ABC(XiSheng) Electronics Co.,Ltd
+5C3B35|Gehirn|Gehirn Inc.
+5C41E7|WiatecIn|Wiatec International Ltd.
+5C6B4F|Private|Private
+5C899A|Tp-LinkT|TP-LINK TECHNOLOGIES CO.,LTD
+5C966A|Rtnet|Rtnet
+5CCCFF|Techrout|Techroutes Network Pvt Ltd
+5CE0C5|IntelCor|Intel Corporate
+5CF7C3|SyntechH|SYNTECH (HK) TECHNOLOGY LIMITED
+5CFC66|Cisco|Cisco
+600417|Posbank|POSBANK CO.,LTD
+60128B|Canon|CANON INC.
+60D9A0|LenovoMo|Lenovo Mobile Communication Technology Ltd.
+60F189|MurataMa|Murata Manufacturing Co., Ltd.
+60F81D|Apple|Apple
+643E8C|HuaweiTe|HUAWEI TECHNOLOGIES CO.,LTD
+64899A|LgElectr|LG Electronics
+64B21D|ChengduP|Chengdu Phycom Tech Co., Ltd.
+64B853|SamsungE|Samsung Elec Co.,Ltd
+6828F6|VubiqNet|Vubiq Networks, Inc.
+6836B5|Drivesca|DriveScale, Inc.
+6899CD|Cisco|Cisco
+68B983|B-Plus|b-plus GmbH
+68C90B|TexasIns|Texas Instruments
+68F0BC|Shenzhen|Shenzhen LiWiFi Technology Co., Ltd
+68F728|LcfcHefe|LCFC(HeFei) Electronics Technology co., ltd
+6C0B84|Universa|Universal Global Scientific Industrial Co.,Ltd.
+6C25B9|BbkElect|BBK Electronics Corp., Ltd.,
+6C2E72|B&BExpor|B&B EXPORTING LIMITED
+6C94F8|Apple|Apple
+6CA7FA|YoungboE|YOUNGBO ENGINEERING INC.
+6CB56B|Humax|HUMAX.CO.,LTD
+6CCA08|ArrisGro|ARRIS Group, Inc.
+700FC7|Shenzhen|SHENZHEN IKINLOOP TECHNOLOGY CO.,LTD.
+703EAC|Apple|Apple
+7076FF|Kerlink|Kerlink
+709F2D|Zte|zte corporation
+70FC8C|Oneacces|OneAccess SA
+70FF5C|Cheerzin|Cheerzing Communication(Xiamen)Technology Co.,Ltd
+7429AF|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+742EFC|Directpa|DirectPacket Research, Inc,
+74547D|CiscoSpv|Cisco SPVTG
+745C9F|TctMobil|TCT mobile ltd.
+7491BD|Four|Four systems Co.,Ltd.
+749637|TodaairE|Todaair Electronic Co., Ltd
+74A02F|Cisco|Cisco
+74A34A|Zimi|ZIMI CORPORATION
+74E277|Vizmonet|Vizmonet Pte Ltd
+78312B|Zte|zte corporation
+78719C|ArrisGro|ARRIS Group, Inc.
+787E61|Apple|Apple
+78ACBF|Igneous|Igneous Systems
+78B3B9|Shanghai|ShangHai sunup lighting CO.,LTD
+78E980|Rainus|RainUs Co.,Ltd
+78EB14|Shenzhen|SHENZHEN FAST TECHNOLOGIES CO.,LTD
+78FC14|BCommuni|B Communications Pty Ltd
+7C1DD9|XiaomiIm|XIAOMI IMC
+7C3CB6|Shenzhen|Shenzhen Homecare Technology Co.,Ltd.
+7C534A|Metamako|Metamako
+801967|Shanghai|Shanghai Reallytek Information Technology  Co.,Ltd
+803773|Netgear|Netgear Inc
+808917|Tp-LinkT|TP-LINK TECHNOLOGIES CO.,LTD
+80D09B|HuaweiTe|Huawei Technologies Co., Ltd
+80F503|Pace|Pace plc
+842690|BeijingT|BEIJING THOUGHT SCIENCE CO.,LTD.
+844464|Serveru|ServerU Inc
+844BB7|BeijingS|Beijing Sankuai Online Technology Co.,Ltd
+8455A5|SamsungE|Samsung Elec Co.,Ltd
+8461A0|ArrisGro|ARRIS Group, Inc.
+8463D6|Microsof|Microsoft Corporation
+847303|LetvMobi|Letv Mobile and Intelligent Information Technology (Beijing) Corporation Ltd.
+84802D|Cisco|Cisco
+848EDF|SonyMobi|Sony Mobile Communications AB
+84A466|SamsungE|Samsung Electronics Co.,Ltd
+84C3E8|Vaillant|Vaillant GmbH
+84CFBF|Fairphon|Fairphone
+84DBAC|HuaweiTe|Huawei Technologies Co., Ltd
+84DDB7|CilagInt|Cilag GmbH International
+881DFC|Cisco|Cisco
+8870EF|ScProfes|SC Professional Trading Co., Ltd.
+88CEFA|HuaweiTe|Huawei Technologies Co., Ltd
+88E161|ArtBeiji|Art Beijing Science and Technology Development Co., Ltd.
+88E603|Avotek|Avotek corporation
+8C0551|Koubachi|Koubachi AG
+8C873B|LeicaCam|Leica Camera AG
+8C9109|Toyoshim|Toyoshima Electric Technoeogy(Suzhou) Co.,Ltd.
+8CE78C|DkNetwor|DK Networks
+900CB4|AlinketE|Alinket Electronic Technology Co., Ltd
+9017AC|HuaweiTe|HUAWEI TECHNOLOGIES CO.,LTD
+902CC7|C-MaxAsi|C-MAX Asia Limited
+9068C3|Motorola|Motorola Mobility LLC
+908D6C|Apple|Apple
+9405B6|LilingFu|Liling FullRiver Electronics & Technology Ltd
+9470D2|WinfirmT|WINFIRM TECHNOLOGY
+948E89|Industri|INDUSTRIAS UNIDAS SA DE CV
+94A1A2|AmpakTec|AMPAK Technology Inc.
+94C038|TallacNe|Tallac Networks
+981DFA|SamsungE|Samsung Electronics Co.,Ltd
+98EECB|WistronI|Wistron InfoComm(ZhongShan)Corporation
+98F5A9|OhsungEl|OHSUNG ELECTRONICS CO.,LTD.
+98FAE3|Xiaomi|Xiaomi inc.
+9C685B|Octonion|Octonion SA
+9CD917|Motorola|Motorola Mobility LLC
+9CE230|Julong|JULONG CO,.LTD.
+9CF387|Apple|Apple
+A0A3E2|Actionte|Actiontec Electronics, Inc
+A0B4A5|SamsungE|Samsung Elec Co.,Ltd
+A0C2DE|CostarVi|Costar Video Systems
+A0ECF9|Cisco|Cisco
+A4251B|Avaya|Avaya, Inc
+A42B8C|Netgear|Netgear Inc
+A44AD3|StElectr|ST Electronics(Shanghai) Co.,Ltd
+A44F29|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+A49D49|Ketra|Ketra, Inc.
+A81D16|Azurewav|AzureWave Technologies, Inc
+A85B78|Apple|Apple
+A86405|Nimbus9|nimbus 9, Inc
+A87C01|SamsungE|Samsung Elec Co.,Ltd
+A8D0E3|SystechE|Systech Electronics Ltd.
+A8D88A|Wyconn|Wyconn
+A8F038|ShenZhen|SHEN ZHEN SHI JIN HUA TAI ELECTRONICS CO.,LTD
+AC3A7A|Roku|Roku
+AC9E17|AsustekC|ASUSTek COMPUTER INC.
+ACABBF|Athentek|AthenTek Inc.
+ACB57D|LiteonTe|Liteon Technology Corporation
+ACC73F|Vitsmo|VITSMO CO., LTD.
+ACD074|Espressi|Espressif Inc.
+ACD1B8|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+B04519|TctMobil|TCT mobile ltd
+B0495F|OmronHea|OMRON HEALTHCARE Co., Ltd.
+B09137|IsisImag|ISis ImageStream Internet Solutions, Inc
+B0E2E5|Fiberhom|Fiberhome Telecommunication Tech.Co.,Ltd.
+B43052|HuaweiTe|Huawei Technologies Co., Ltd
+B43934|PenGener|Pen Generations, Inc.
+B47356|Hangzhou|Hangzhou Treebear Networking Co., Ltd.
+B4A828|Shenzhen|Shenzhen Concox Information Technology Co., Ltd
+B4A9FE|GhiaTech|GHIA Technology (Shenzhen) LTD
+B8098A|Apple|Apple
+B88EC6|Stateles|Stateless Networks
+B8AEED|Elitegro|Elitegroup Computer Systems Co., Ltd.
+BC16F5|Cisco|Cisco
+BC4DFB|HitronTe|Hitron Technologies. Inc
+BC52B4|Alcatel-|Alcatel-Lucent
+BC54F9|DrogooTe|Drogoo Technology Co., Ltd.
+BC6E64|SonyMobi|Sony Mobile Communications AB
+BC74D7|Hangzhou|HangZhou JuRu Technology CO.,LTD
+BCB308|Hongkong|HONGKONG RAGENTEK COMMUNICATION TECHNOLOGY CO.,LIMITED
+BCBC46|SksWeldi|SKS Welding Systems GmbH
+BCD165|CiscoSpv|Cisco SPVTG
+BCE767|Quanzhou|Quanzhou  TDX Electronics Co., Ltd
+BCEAFA|HewlettP|Hewlett Packard
+BCEC23|Shenzhen|SHENZHEN CHUANGWEI-RGB ELECTRONICS CO.,LTD
+C035C5|Prosoft|Prosoft Systems LTD
+C03896|HonHaiPr|Hon Hai Precision Ind. Co.,Ltd.
+C05627|BelkinIn|Belkin International, Inc.
+C07009|HuaweiTe|Huawei Technologies Co., Ltd
+C09879|Acer|Acer Inc.
+C0BDD1|SamsungE|Samsung Electro Mechanics co., LTD.
+C40880|Shenzhen|Shenzhen UTEPO Tech Co., Ltd.
+C4BE84|TexasIns|Texas Instruments.
+C81B6B|InnovaSe|Innova Security
+CCBDD3|Ultimake|Ultimaker B.V.
+D02212|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+D04F7E|Apple|Apple
+D05BA8|Zte|zte corporation
+D0929E|Microsof|Microsoft Corporation
+D0BF9C|HewlettP|Hewlett Packard
+D40598|ArrisGro|ARRIS Group, Inc.
+D40B1A|Htc|HTC Corporation
+D43266|Fike|Fike Corporation
+D46D50|Cisco|Cisco
+D48DD9|MeldTech|Meld Technology, Inc
+D4F513|TexasIns|Texas Instruments
+D83C69|TinnoMob|Tinno Mobile Technology Corp
+D87495|Zte|zte corporation
+D88039|Microchi|Microchip Technology Inc.
+D88466|ExtremeN|Extreme Networks
+D88D5C|Elentec|Elentec
+D89341|GeneralE|General Electric Global Research
+D897BA|Pegatron|PEGATRON CORPORATION
+D8BB2C|Apple|Apple
+D8CB8A|Micro-St|Micro-Star INTL CO., LTD.
+D8F710|LibreWir|Libre Wireless Technologies Inc.
+DC0914|Talk-A-P|Talk-A-Phone Co.
+DC60A1|Teledyne|Teledyne DALSA Professional Imaging
+DCC622|BuheungS|BUHEUNG SYSTEM
+DCE1AD|Shenzhen|Shenzhen Wintop Photoelectric Technology Co., Ltd
+DCEC06|HeimiNet|Heimi Network Technology Co., Ltd.
+E0191D|HuaweiTe|Huawei Technologies Co., Ltd
+E03E44|Broadcom|Broadcom Corporation
+E0885D|Technico|Technicolor CH USA Inc
+E0899D|Cisco|Cisco
+E0D173|Cisco|Cisco
+E0FFF7|Softiron|Softiron Inc.
+E42354|Shenzhen|SHENZHEN FUZHI SOFTWARE TECHNOLOGY CO.,LTD
+E48501|GeberitI|Geberit International AG
+E48C0F|Discover|Discovery Insure
+E4BAD9|360Fly|360 Fly Inc.
+E4F8EF|SamsungE|Samsung Elec Co.,Ltd
+E4FED9|EdmiEuro|EDMI Europe Ltd
+E8162B|IdeoSecu|IDEO Security Co., Ltd.
+E81863|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+E83381|ArrisGro|ARRIS Group, Inc.
+E8447E|Bitdefen|Bitdefender SRL
+E874E6|AdbBroad|ADB BROADBAND ITALIA
+E887A3|LoxleyPu|Loxley Public Company Limited
+E88E60|Nsd|NSD Corporation
+E8C74F|LiteonTe|Liteon Technology Corporation
+E8CC18|D-LinkIn|D-Link International
+EC24B8|TexasIns|Texas Instruments
+EC59E7|Microsof|Microsoft Corporation
+EC8009|Novaspar|NovaSparks
+EC8892|Motorola|Motorola Mobility LLC
+ECB1D7|HewlettP|Hewlett Packard
+ECBAFE|Giroptic|Giroptic
+ECE2FD|SkgElect|SKG Electric Group(Thailand) Co., Ltd.
+F01C2D|JuniperN|Juniper Networks
+F02475|Apple|Apple
+F0B052|RuckusWi|Ruckus Wireless
+F0DBE2|Apple|Apple
+F0F336|Tp-LinkT|TP-LINK TECHNOLOGIES CO.,LTD
+F0FE6B|Shanghai|Shanghai High-Flying Electronics Technology Co., Ltd
+F4032F|Reduxio|Reduxio Systems
+F44E05|Cisco|Cisco
+F4645D|Toshiba|Toshiba
+F4EE14|Shenzhen|SHENZHEN MERCURY COMMUNICATION TECHNOLOGIES CO.,LTD.
+F80278|IeeeRegi|IEEE REGISTRATION AUTHORITY  - Please see MAM public listing for more information.
+F84360|Ingenico|Ingenico
+F88479|YaojinTe|Yaojin Technology(Shenzhen)Co.,Ltd
+F8B2F3|Guangzho|GUANGZHOU BOSMA TECHNOLOGY CO.,LTD
+F8BC41|Rosslare|Rosslare Enterprises Limited
+F8C397|Nzxt|NZXT Corp. Ltd.
+F8C96C|Fiberhom|Fiberhome Telecommunication Tech.Co.,Ltd.
+FC3288|CelotWir|CELOT Wireless Co., Ltd
+FC3D93|Longchee|LONGCHEER TELECOMMUNICATION LIMITED
+FC5B39|Cisco|Cisco
+FC62B9|AlpsErec|ALPS ERECTRIC CO.,LTD
+FCAFAC|Panasoni|Panasonic System LSI
+FCB4E6|AskeyCom|ASKEY COMPUTER CORP.
+FCB698|Cambridg|Cambridge Industries(Group) Co.,Ltd.

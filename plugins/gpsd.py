@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+import math
 import logging
-from sqlalchemy import Float, DateTime, String, Integer, Table, MetaData, Column #As required
+from sqlalchemy import Float, Numeric, DateTime, String, Integer, Table, MetaData, Column #As required
 from threading import Thread
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s %(levelname)s %(filename)s: %(message)s',
@@ -84,7 +85,8 @@ class Snoop(Thread):
                         slat = float("%0.4f" %(res.get('lat')))
                         slong = float("%0.4f" %(res.get('lon')))
                         salt=-1
-                        if res.get('alt') != n:
+                        # Certain receivers sometimes don't provide altitude values (e.g. Nexus 7 2013 internal GPS)
+                        if res.get('alt') != n and not math.isnan(res.get('alt')):
                             salt = int(res.get('alt'))
                         if slat != self.last_lat or slong != self.last_long or abs(salt - self.last_alt) > 2 and self.verb > 0:
                             logging.info("Plugin %s%s%s indicated new GPS position: %s(%s,%s) @ %sm%s" % (GR,self.fname,G,GR,slat,slong,salt,G))
@@ -95,7 +97,7 @@ class Snoop(Thread):
                         logging.debug("No good signal on GPS yet... (%s)"%(str(res)))
                         if self.verb > 0:
                             logging.warning("Plugin %s%s%s looking for good GPS fix..." % (GR,self.fname,G) )
-                        lastMessage = dt    
+                        lastMessage = dt
 
             if self.freq == 0 and gotGoodFixOnce:
                 self.RUN = False
@@ -114,7 +116,7 @@ class Snoop(Thread):
     @staticmethod
     def get_parameter_list():
         info = {"info" : "Queries gpsd server for GPS co-ordinates. Ensure the gpsd daemon is running, and on port 2947.",
-                "parameter_list" : [ ("freq=<seconds>","Frequency to poll GPS. Set to 0 to get one fix, and end."), 
+                "parameter_list" : [ ("freq=<seconds>","Frequency to poll GPS. Set to 0 to get one fix, and end."),
                                      ("lat=<LAT>","Manually set GPS latitude"),
                                      ("long=<LONG>","Manually set GPS longitude")
                                     ]
@@ -140,8 +142,8 @@ class Snoop(Thread):
         table = Table('gpsd',MetaData(),
                             Column('systemTime', DateTime, default='' ),
                             Column('time', DateTime, default=''),
-                            Column('lat', Float()),
-                            Column('lon', Float()),
+                            Column('lat', Numeric(precision=12,scale=9)),
+                            Column('lon', Numeric(precision=12,scale=9)),
                             Column('speed', Float()),
                             Column('alt', Float()),
                             Column('epx', Float()),

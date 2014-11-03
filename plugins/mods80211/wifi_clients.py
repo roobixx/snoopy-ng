@@ -14,6 +14,7 @@ import os
 from includes.prox import prox
 from includes.mac_vendor import mac_vendor
 from includes.fifoDict import fifoDict
+from includes import scapy_ex
 
 class Snarf():
     """Observe WiFi client devices based on probe-requests emitted."""
@@ -27,8 +28,11 @@ class Snarf():
         self.prox = prox(proxWindow=self.proxWindow, identName="mac", pulseName="num_probes", verb=0, callerName=self.fname)
         self.device_vendor = fifoDict(names=("mac", "vendor", "vendorLong"))
         self.client_ssids = fifoDict(names=("mac","ssid"))
+        self.probes = fifoDict(names=("mac","ssid", "timestamp", "timestamp_ms", "dbm_antsignal", "channel", "fcs"), size=5000)
+        self.probeCount = 0
+        self.droppedCount = 0
 
-        self.mv = mac_vendor()    
+        self.mv = mac_vendor()
         self.lastPrintUpdate = 0
 
     @staticmethod
@@ -39,8 +43,7 @@ class Snarf():
                       Column('first_obs', DateTime, primary_key=True, autoincrement=False),
                       Column('last_obs', DateTime),
                       Column('num_probes', Integer),
-                      Column('sunc', Integer, default=0),
-                    )
+                      Column('sunc', Integer, default=0))
 
         table2 = Table('vendors', MetaData(),
                       Column('mac', String(64), primary_key=True), #Len 64 for sha256
@@ -50,27 +53,44 @@ class Snarf():
 
         table3 = Table('wifi_client_ssids', MetaData(),
                       Column('mac', String(64), primary_key=True), #Len 64 for sha256
-                      Column('ssid', String(100), primary_key=True, autoincrement=False),
+                      Column('ssid', String(32), primary_key=True, autoincrement=False),
                       Column('sunc', Integer, default=0))
 
-        return [table, table2, table3]
+        table4 = Table('wifi_probes', MetaData(),
+                      Column('mac', String(64), primary_key=True), #Len 64 for sha256
+                      Column('ssid', String(32), primary_key=True),
+                      Column('timestamp', DateTime, primary_key=True),
+                      Column('timestamp_ms', Integer, primary_key=True),
+                      Column('dbm_antsignal', Integer),
+                      Column('channel', Integer),
+                      Column('fcs', Integer),
+                      Column('sunc', Integer, default=0))
+
+        return [table, table2, table3, table4]
 
     def proc_packet(self,p):
-        
+
         if not p.haslayer(Dot11ProbeReq):
             return
-        timeStamp = datetime.datetime.fromtimestamp(int(p.time))
+
+        timeStamp = datetime.datetime.fromtimestamp(p.time)
         mac = re.sub(':', '', p.addr2)
         vendor = self.mv.lookup(mac[:6])
+        ssid = ''
+        sig_str = p.dBm_AntSignal
+        channel = p.Channel
+        fcs = -1
+
+        if p.Flags is not None:
+            if p.Flags & 64 != 0:
+                self.droppedCount += 1
+                fcs = 0
+            elif p.Flags & 64 == 0:
+                fcs = 1
 
         if self.hash_macs == "True":
             mac = snoop_hash(mac)
 
-        try:
-            sig_str = -(256-ord(p.notdecoded[-4:-3])) #TODO: Use signal strength
-        except:
-            #logging.error("Unable to extract signal strength")
-            pass 
         self.prox.pulse(mac, timeStamp) #Using packet time instead of system time allows us to read pcaps
         self.device_vendor.add((mac,vendor[0],vendor[1]))
 
@@ -82,16 +102,30 @@ class Snarf():
             if len(ssid) > 0:
                 self.client_ssids.add((mac,ssid))
 
+        probe = (mac,ssid,timeStamp,timeStamp.microsecond,sig_str,channel,fcs)
+        if self.verb > 1:
+            logging.info("Sub-plugin %s%s%s noted probe %s%s%s" % (GR,self.fname,G,GR,probe,G))
+        self.probes.add(probe)
+
     def get_data(self):
         """Ensure data is returned in the form (tableName,[colname:data,colname:data]) """
         proxSess =  self.prox.getProxs()
         vendors = self.device_vendor.getNew()
         ssid_list = self.client_ssids.getNew()
+        probes_List = self.probes.getNew()
+
+        self.probeCount += len(probes_List)
 
         if proxSess and self.verb > 0 and abs(os.times()[4] - self.lastPrintUpdate) > printFreq:
             logging.info("Sub-plugin %s%s%s currently observing %s%d%s client devices" % (GR,self.fname,G,GR,self.prox.getNumProxs(),G))
+            logging.info("Sub-plugin %s%s%s collected %s%d%s probes" % (GR,self.fname,G,GR,self.probeCount,G))
             self.lastPrintUpdate = os.times()[4]
 
-        data = [("wifi_client_obs",proxSess), ("vendors",vendors), ("wifi_client_ssids", ssid_list)]
+        data = [
+            ("wifi_client_obs",proxSess),
+            ("vendors",vendors),
+            ("wifi_client_ssids", ssid_list),
+            ("wifi_probes", probes_List)]
+
         return data
 

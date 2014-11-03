@@ -10,14 +10,13 @@ from threading import Thread
 import includes.monitor_mode as mm
 #import includes.LogManager
 logging.getLogger("scapy.runtime").setLevel(logging.ERROR)
-from scapy.all import sniff, Dot11Elt, Dot11ProbeReq, rdpcap, PcapReader
+from scapy.all import sniff, rdpcap, PcapReader
 from scapy.error import Scapy_Exception
 from collections import deque
 import time
 from plugins.mods80211.prefilter.prefilter import prefilter
 import sys
 from includes.fonts import *
-#logging.basicConfig(level=logging.DEBUG,format='%(asctime)s %(levelname)s %(filename)s: %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
 
 class Snoop(Thread):
     """
@@ -117,7 +116,7 @@ class Snoop(Thread):
                 self.packeteer(packet)
             except StopIteration:
                 goGo = False
-        
+
         end = int(os.times()[4])
         duration = end - start
         time.sleep(3)
